@@ -1,0 +1,55 @@
+
+
+<h1>Website Title</h1>
+<a href="/contact/">Contact</a>
+<a href="/about/">About</a>
+
+    <title>Dummy Data Table</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #444;
+            text-align: center;
+        }
+        th {
+            background-color: #eee;
+        }
+    </style>
+
+    <h2 style="text-align:center;">Name and Age Table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in people %}
+
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ person.name }}</td>
+                <td>{{ person.age }}</td>
+                <td>
+                    {% if person.age > 30 %}
+                    Yes
+                    {% else %}
+                    No
+                    {% endif %}
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+
