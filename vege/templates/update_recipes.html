@@ -79,81 +79,23 @@
             height: auto;
             border-radius: 5px;
         }
-        .logout-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-.logout-button {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.logout-button:hover {
-    background-color: #cc0000;
-}
     </style>
 </head>
 <body>
-    {% if user.is_authenticated %}
-    <div class="logout-container">
-        <form method="POST" action="{% url 'logout_recipe' %}">
-            {% csrf_token %}
-            <button type="submit" class="logout-button">Logout</button>
-        </form>
-    </div>
-    {% endif %}
-    <h1>Submit a Recipe</h1>
+    <h1>Update Recipe</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="name">Recipe Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" value="{{recipe.name}}" required>
 
         <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" required></textarea>
+        <textarea id="description" name="description" rows="4" required>{{recipe.description}}</textarea>
 
         <label for="recipeimage">Upload Image:</label>
-        <input type="file" id="recipeimage" name="image" required>
+        <input type="file" id="recipeimage" name="image" >
 
-        <input type="submit" value="Submit Recipe">
+        <input type="submit" value="Update Recipe">
     </form>
-    <div>
-        <form>
-            <label for="search">Search</label>
-            <input type="text" id="search" name="search" >
-            <button type="submit">Search</button>
-        </form>
-    </div>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Image</th>
-            <th>Actions</th>
-        </tr>
-
-        <!-- Example row: Replace this with Django template loop -->
-        {% for recipe in recipes %}
-        <tr>
-            <td>{{ recipe.id }}</td>
-            <td>{{ recipe.name }}</td>
-            <td>{{ recipe.description }}</td>
-            <td><img src="{{ recipe.image.url }}" alt="{{ recipe.name }}"></td>
-            <td>
-                <a href="/delete_recipe/{{recipe.id}}" >Delete</a>
-                <a href="/update_recipe/{{recipe.id}}" >Update</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
 </body>
 </html>
